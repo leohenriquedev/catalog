@@ -1,7 +1,14 @@
+const connection = require('../database/connection');
+
+// Get catalog.json
+const catalog = require('../json/catalog.json');
+
 module.exports = {
 
     async helloWorld(request, response) {
-        await response.json({message : 'hello world!'});
+        const data = await connection('products').select('*');
+        console.log(data);
+        await response.json(catalog);
     }
 
 }
