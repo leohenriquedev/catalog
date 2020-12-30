@@ -4,6 +4,6 @@ const routes = require('express').Router();
 const CatalogController = require('./controllers/CatalogController');
 
 // Routes
-routes.get('/data', CatalogController.index);
+routes.post('/data', CatalogController.index);
 
 module.exports = routes;

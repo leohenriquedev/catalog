@@ -5,7 +5,12 @@ const catalog = require('../json/catalog.json');
 
 module.exports = {
 
-    async index(request, response) {
+    async index(request, response, next) {
+
+        const maxProducts = request.body.maxProducts;
+        const mostPopular = request.body.mostPopular;
+        const priceReduction = request.body.priceReduction;
+
         const result = await connection('products').count('id');
 
         if (result[0].count == 0) {
@@ -30,19 +35,11 @@ module.exports = {
                     }
                 }
             });
-
-            return response.json(availableProducts);
-
         }
-
-        const maxProducts = 16;
 
         const products = await connection('products').select('*').limit(maxProducts);
         return response.json(products);
 
-        // const maxProducts = request.body.maxProducts;
-        // const mostPopular = request.body.mostPopular;
-        // const priceReduction = request.body.priceReduction;
     }
 
 }
