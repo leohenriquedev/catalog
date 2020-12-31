@@ -7,29 +7,30 @@ module.exports = {
 
     async index(request, response, next) {
 
-        const maxProducts = request.body.maxProducts;
-        const mostPopular = request.body.mostPopular;
-        const priceReduction = request.body.priceReduction;
+        const maxProducts = request.body.maxProducts >= 10 ? request.body.maxProducts : 10;
+        const responseType = request.body.responseType == 'complete' ? '*' : ['name', 'price', 'status', 'categories'];
+        const mostPopularIds = request.body.mostPopularIds;
+        const priceReductionIds = request.body.priceReductionIds;
 
         const result = await connection('products').count('id');
 
         if (result[0].count == 0) {
 
-            const availableProducts = [];
-
             catalog.map(async (obj) => {
 
                 if (['available', 'AVAILABLE'].includes(obj.status)) {
-                    availableProducts.push({
+                    var availableProduct = {
+                        productId: obj.id,
                         name: obj.name,
                         price: obj.price,
+                        oldPrice: obj.oldPrice,
                         status: obj.status,
                         categories: obj.categories[0].name,
                         image: obj.images.default
-                    });
+                    };
 
                     try {
-                        await connection('products').insert(availableProducts);
+                        await connection('products').insert(availableProduct);
                     } catch (error) {
                         console.log(error);
                     }
@@ -37,8 +38,13 @@ module.exports = {
             });
         }
 
-        const products = await connection('products').select('*').limit(maxProducts);
-        return response.json(products);
+        const mostPopularProducts = await connection('products').select(responseType).whereIn('productId', mostPopularIds).limit(maxProducts);
+        const priceReductionProducts = await connection('products').select(responseType).whereIn('productId', priceReductionIds).limit(maxProducts);
+
+        return response.json({
+            mostPopularProducts: mostPopularProducts,
+            priceReductionProducts: priceReductionProducts
+        });
 
     }
 
