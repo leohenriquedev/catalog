@@ -1,0 +1,52 @@
+.react-multiple-carousel__arrow--right {
+    margin-right: -30px;
+}
+
+.react-multiple-carousel__arrow--left {
+    margin-left: -30px;
+}
+
+.react-multiple-carousel__arrow:hover, .react-multiple-carousel__arrow:not(hover){
+    background: none;
+    outline: none;
+}
+
+.react-multiple-carousel__arrow::before {
+    color: #e67331;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+img {
+    width: 150px;
+    height: 160px;
+}
+
+h5 {
+    color: #411d5a;
+    display: flex;
+    justify-content: center;
+}
+
+p {
+    margin: 0;
+}
+
+p .productName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+
+p .productOldPrice {
+    color: #777779;
+    text-decoration: line-through;
+}
+
+p .productPrice {
+    color: #411d5a;
+    font-weight: bold;
+}

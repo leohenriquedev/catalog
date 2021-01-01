@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import Carolsel from '../../components/Carolsel';
+import CarouselComponent from '../../components/CarouselComponent';
 
 export default function Catalog() {
 
@@ -54,8 +54,8 @@ export default function Catalog() {
     return(
         <React.Fragment>
 
-            <Carolsel title="Vitrine de mais populares" products={mostPopular} />
-            <Carolsel title="Vitrine de ofertas" products={priceReduction} />
+            <CarouselComponent title="Mais Vendidos" products={mostPopular} />
+            <CarouselComponent title="Produtos que baixaram de preço" products={priceReduction} />
 
         </React.Fragment>
         
