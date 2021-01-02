@@ -32,7 +32,7 @@ export default function Catalog() {
                     priceReductionIds.push(obj.recommendedProduct.id);
                 });
     
-                axios.post('http://localhost:3333/api/products', {
+                axios.post('http://localhost:3001/api/products', {
                     maxProducts: maxProducts,
                     responseType: responseType,
                     mostPopularIds: mostPopularIds,
