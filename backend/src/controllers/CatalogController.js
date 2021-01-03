@@ -6,8 +6,7 @@ const catalog = require('../json/catalog.json');
 module.exports = {
 
     async index(request, response, next) {
-
-
+        
         const maxProducts = request.body.maxProducts >= 10 ? request.body.maxProducts : 10;
         const responseType = request.body.responseType == 'complete' ? '*' : ['name', 'price', 'status', 'categories'];
         const mostPopularIds = request.body.mostPopularIds;

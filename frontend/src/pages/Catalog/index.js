@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import CarouselComponent from '../../components/CarouselComponent';
+import Loading from '../../components/Loading';
 
 export default function Catalog() {
 
@@ -11,6 +12,7 @@ export default function Catalog() {
     const [priceReductionIds, setpriceReductionIds] = useState([]);
     const [mostPopular, setmostPopular] = useState([]);
     const [priceReduction, setpriceReduction] = useState([]);
+    const [isLoading, setisLoading] = useState(true);
 
     useEffect(() => {
 
@@ -40,6 +42,8 @@ export default function Catalog() {
                 }).then((response) => {
                     setmostPopular(response.data.mostPopularProducts);
                     setpriceReduction(response.data.priceReductionProducts);
+
+                    setisLoading(false);
                 });
             }));
 
@@ -53,11 +57,11 @@ export default function Catalog() {
 
     return(
         <React.Fragment>
+            <Loading visible={isLoading} />
 
             <CarouselComponent title="Mais Vendidos" products={mostPopular} />
             <CarouselComponent title="Produtos que baixaram de preço" products={priceReduction} />
 
-        </React.Fragment>
-        
+        </React.Fragment>  
     );
 }

@@ -11,7 +11,7 @@ services:
       - "database"
     links:
       - database
-    restart: always
+    restart: on-failure
 
   database:
     container_name: "pg"
