@@ -25,12 +25,11 @@ O desafio proposto foi desenvolver um sistema de vitrines de um site, contendo b
 
     Na raiz do projeto, rode o comando "docker-compose up --build"
 
-
 * Sem docker
 
-    * Na pasta backend, edite o arquivo "knexfile.js" de acordo com o banco de dados do seu ambiente, em seguida rode o comando no terminal "npx knex migrate:latest && npm start"
+    * Na pasta backend, edite o arquivo "knexfile.js" de acordo com o banco de dados do seu ambiente, em seguida rode o comando no terminal "npm install && npx knex migrate:latest && npm start"
         
-    * Na pasta frontend, rode o comando no terminal "npm start"
+    * Na pasta frontend, rode o comando no terminal "npm install && npm start"
 
 # Acesso ao sistema
 
